@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVLK Network - ATM10</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav id="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">
+          <span class="pixel-font lava-text">SVLK</span>
+          <span class="version-badge">ATM10</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#hero" class="active">Accueil</a></li>
+          <li><a href="#features">Infos</a></li>
+          <li><a href="#join">Rejoindre</a></li>
+          <li>
+            <a href="vanilla.html" style="color: #4ade80; font-weight: bold"
+              >Vanilla 🌱</a
+            >
+          </li>
+        </ul>
+
+        <div class="nav-cta">
+          <a
+            href="https://discord.gg/vmPmry8Wqz"
+            target="_blank"
+            class="discord-btn"
+          >
+            <i class="fa-brands fa-discord"></i>
+            <span>Discord</span>
+          </a>
+        </div>
+
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <header id="hero">
+      <div id="particles-container"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <div class="server-status-pill" id="server-status">
+          <span class="status-dot online"></span>
+          <span class="status-text" id="player-count"
+            >Recherche du statut...</span
+          >
+        </div>
+
+        <h1 class="pixel-font title-large">
+          SVLK <span class="lava-text">MODDED</span>
+        </h1>
+        <p class="subtitle">
+          Plongez dans l'expérience <strong>All The Mods 10</strong>. <br />
+          Un serveur moddé stable, une communauté mature et une aventure sans
+          limite.
+        </p>
+
+        <div class="cta-group">
+          <button class="btn btn-primary pixel-font" onclick="copyIP()">
+            <span id="ip-text">svlk.lakel.dev</span>
+            <i class="fa-regular fa-copy"></i>
+          </button>
+          <a href="#join" class="btn btn-secondary pixel-font"
+            >COMMENT REJOINDRE ?</a
+          >
+        </div>
+        <div id="copy-feedback" class="copy-feedback">IP Copiée !</div>
+      </div>
+
+      <div class="scroll-indicator">
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+      </div>
+    </header>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title pixel-font">
+            L'EXPÉRIENCE <span class="lava-text">SVLK</span>
+          </h2>
+          <div class="divider"></div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon orange"><i class="fa-solid fa-cube"></i></div>
+            <h3 class="pixel-font">ATM 10</h3>
+            <p>
+              La dernière version du modpack légendaire. De nouvelles machines,
+              de la magie revisitée et des biomes incroyables.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-icon red">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 class="pixel-font">Whitelist</h3>
+            <p>
+              Nous privilégions la qualité à la quantité. Une candidature simple
+              pour garantir une entente parfaite entre joueurs.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-icon yellow">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3 class="pixel-font">Performance</h3>
+            <p>
+              Hébergé sur une machine dédiée haute fréquence. Zéro lag, chunks
+              pré-générés et redémarrages optimisés.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="join">
+      <div class="container join-container">
+        <div class="join-content">
+          <h2 class="section-title pixel-font">
+            COMMENCER L'<span class="lava-text">AVENTURE</span>
+          </h2>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-number pixel-font">1</div>
+              <div class="timeline-content">
+                <h3>Discord</h3>
+                <p>
+                  Tout commence ici. Rejoins notre serveur pour rencontrer la
+                  communauté.
+                </p>
+                <a
+                  href="https://discord.gg/vmPmry8Wqz"
+                  target="_blank"
+                  class="small-link"
+                  >Rejoindre le Discord &rarr;</a
+                >
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-number pixel-font">2</div>
+              <div class="timeline-content">
+                <h3>Candidature</h3>
+                <p>
+                  Présente-toi brièvement dans le salon dédié ou ouvre un
+                  ticket. Pas besoin de CV, juste d'être cool.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-number pixel-font">3</div>
+              <div class="timeline-content">
+                <h3>Connexion</h3>
+                <p>
+                  Une fois whitelisté, lance ton launcher ATM10 et connecte-toi
+                  à l'IP !
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo pixel-font">SVLK NETWORK</div>
+        <p class="copyright">
+          © 2025 SVLK. Not affiliated with Mojang Studios.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
