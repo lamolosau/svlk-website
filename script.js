@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Navbar Glass Effect
   const navbar = document.getElementById("navbar");
   window.addEventListener("scroll", () => {
     if (window.scrollY > 20) {
@@ -9,21 +8,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 2. Parallaxe Fond
-  const hero = document.getElementById("hero");
-  window.addEventListener("scroll", () => {
-    let scrollPosition = window.scrollY;
-    // Vérification de sécurité si hero existe
-    if (hero) {
-      hero.style.backgroundPositionY = scrollPosition * 0.5 + "px";
-    }
-  });
+  const hamburger = document.querySelector(".hamburger");
+  const navMenu = document.querySelector(".nav-menu");
 
-  // 3. Particules (Braises) - CORRIGÉ
+  if (hamburger) {
+    hamburger.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      const bars = document.querySelectorAll(".bar");
+      if (navMenu.classList.contains("active")) {
+        bars[0].style.transform = "rotate(-45deg) translate(-5px, 6px)";
+        bars[1].style.opacity = "0";
+        bars[2].style.transform = "rotate(45deg) translate(-5px, -6px)";
+      } else {
+        bars[0].style.transform = "none";
+        bars[1].style.opacity = "1";
+        bars[2].style.transform = "none";
+      }
+    });
+  }
+
   const particlesContainer = document.getElementById("particles-container");
 
   if (particlesContainer) {
-    const particleCount = 50; // Nombre de particules
+    const particleCount = 40;
 
     for (let i = 0; i < particleCount; i++) {
       createEmber();
@@ -33,34 +40,35 @@ document.addEventListener("DOMContentLoaded", () => {
       const ember = document.createElement("div");
       ember.classList.add("ember");
 
-      // Randomisation position horizontale
       ember.style.left = Math.random() * 100 + "%";
+      ember.style.bottom = "-20px";
 
-      // Durée aléatoire
-      const duration = Math.random() * 5 + 3; // entre 3 et 8s
-      ember.style.animationName = "rise";
-      ember.style.animationDuration = duration + "s";
-      ember.style.animationTimingFunction = "ease-in";
-      ember.style.animationIterationCount = "infinite";
-
-      // Délai aléatoire
+      const duration = Math.random() * 5 + 4;
+      ember.style.animation = `rise ${duration}s linear infinite`;
       ember.style.animationDelay = Math.random() * 5 + "s";
 
-      // Taille aléatoire
-      const size = Math.random() * 4 + 3; // Un peu plus grosses (3px à 7px)
+      const size = Math.random() * 4 + 2;
       ember.style.width = size + "px";
       ember.style.height = size + "px";
-
-      // Couleur forcée ici pour être sûr
-      ember.style.backgroundColor = "#ff5500";
+      ember.style.opacity = Math.random() * 0.7;
 
       particlesContainer.appendChild(ember);
     }
+
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = `
+        @keyframes rise {
+          0% { transform: translateY(0) translateX(0); opacity: 0; }
+          20% { opacity: 1; }
+          100% { transform: translateY(-100vh) translateX(${
+            Math.random() * 100 - 50
+          }px); opacity: 0; }
+        }
+      `;
+    document.head.appendChild(styleSheet);
   }
 
-  // 4. Copier IP - MISE A JOUR
   window.copyIP = function () {
-    // Rendu global pour être sûr que le HTML le trouve
     const ip = "svlk.lakel.dev";
     navigator.clipboard
       .writeText(ip)
@@ -69,10 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const ipText = document.getElementById("ip-text");
 
         if (ipText) ipText.innerText = "Copié !";
-        if (feedback) feedback.classList.add("visible");
+        if (feedback) feedback.style.opacity = "1";
 
         setTimeout(() => {
-          if (feedback) feedback.classList.remove("visible");
+          if (feedback) feedback.style.opacity = "0";
           if (ipText) ipText.innerText = ip;
         }, 2000);
       })
@@ -81,15 +89,55 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   };
 
-  // 5. Statut Serveur (Simulation)
-  setTimeout(() => {
-    const statusText = document.getElementById("player-count");
-    const statusDot = document.querySelector(".status-dot");
+  const serverIp = "svlk.lakel.dev";
+  const footerCount = document.getElementById("footer-count");
+  const statusDot = document.querySelector(".status-dot");
 
-    if (statusText && statusDot) {
-      statusText.innerText = "En ligne • 12 Joueurs";
-      statusText.style.color = "#fff";
-      statusDot.classList.add("online");
-    }
-  }, 1500);
+  if (footerCount) footerCount.innerText = "Recherche...";
+
+  fetch(`https://api.mcsrvstat.us/2/${serverIp}`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.online) {
+        if (footerCount)
+          footerCount.innerText = `${data.players.online} Joueurs en ligne`;
+        if (statusDot) {
+          statusDot.style.background = "#22c55e";
+          statusDot.style.boxShadow = "0 0 10px #22c55e";
+        }
+      } else {
+        if (footerCount) footerCount.innerText = "Serveur Hors-ligne";
+        if (statusDot) {
+          statusDot.style.background = "#ef4444";
+          statusDot.style.boxShadow = "none";
+        }
+      }
+    })
+    .catch((err) => {
+      console.log("Erreur API status:", err);
+      if (footerCount) footerCount.innerText = "Non disponible";
+    });
+
+  const form = document.getElementById("whitelistForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("submitBtn");
+      const originalText = btn.innerText;
+
+      btn.innerText = "Envoi en cours...";
+      btn.style.opacity = "0.7";
+
+      setTimeout(() => {
+        btn.innerText = "Candidature Envoyée !";
+        btn.style.background = "#22c55e";
+        form.reset();
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.style.background = "";
+          btn.style.opacity = "1";
+        }, 3000);
+      }, 1500);
+    });
+  }
 });
